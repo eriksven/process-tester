@@ -12,18 +12,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Create release
-        uses: softprops/action-gh-release@v2
-        id: create_release
       - name: Show release URL
         run: |
-          echo ${{ steps.create_release.outputs.url }}
+          echo ${{ github.event.release.html_url }}
       # Do the quality artifact collection thing
       - name: Collect quality artifacts
         uses: eclipse-dash/quevee@v1
         id: quevee
         with:
-          release_url: ${{ steps.create_release.outputs.url }}
+          release_url: ${{ github.event.release.html_url }}
           artifacts_readme: README.md
           artifacts_requirements: docs/requirements.md
           artifacts_testing: tests/file_1
