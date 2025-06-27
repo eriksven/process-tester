@@ -1,7 +1,6 @@
 on:
-  push:
-    tags:
-      - v*
+  release:
+    types: [published]
 concurrency:
   group: "release-${{ github.head_ref || github.ref }}"
   cancel-in-progress: true
@@ -27,7 +26,7 @@ jobs:
           release_url: ${{ steps.create_release.outputs.url }}
           artifacts_readme: README.md
           artifacts_requirements: docs/requirements.md
-          artifacts_testing: tests/file_1, tests/file_2
+          artifacts_testing: tests/file_1
           artifacts_documentation: 
           artifacts_coding_guidelines: docs/coding_guidelines.md
           artifacts_release_process: https://example.org/my_release_process/
@@ -37,4 +36,4 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.quevee.outputs.manifest_file }}
-          tag: ${{ github.ref }}
+          tag: ${{ github.ref }}  
