@@ -26,7 +26,7 @@ jobs:
           artifacts_testing: tests/file_1
           artifacts_documentation: 
           artifacts_coding_guidelines: docs/coding_guidelines.md
-          artifacts_release_process: example.org/my_release_process/
+          artifacts_release_process: https://example.org/my_release_process/${{ github.event.release.tag_name }}
       - name: Upload quality manifest to release
         uses: svenstaro/upload-release-action@v2
         id: upload_manifest
